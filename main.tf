@@ -13,18 +13,40 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-resource "random_integer" "rand_int" {
-  min = 10000
-  max = 99999
-}
+# EC2 Security Group - Example
+resource "aws_security_group" "new-webserver-sg" {
+  name        = "azure-devops-sg-example"
+  description = "Allow HTTP from Anywhere"
 
-resource "aws_s3_bucket" "aws-b1" {
-  bucket = "${var.bucket_name}-${random_integer.rand_int.result}"
-  acl    = "private"
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP port 80"
+  }
 
-  tags   = {
-    Name        = "${var.bucket_name}-${random_integer.rand_int.result}" 
-    Environment = "Dev"
-    Owner       = "Lennox T."
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS port 443"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name      = "azure-devops-sg"
+    Env       = "Dev"
+    Owner     = "Lennox T."
+    CreatedBy = "Terraform"
   }
 }
+
+

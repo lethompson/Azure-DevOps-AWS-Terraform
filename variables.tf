@@ -15,9 +15,3 @@ variable "secret_key" {
   type = string
 
 }
-
-variable "bucket_name" {
-  description = "The name of S3 bucket"
-  default  = "Terraform-bucket-LT"
-  type = string
-}
