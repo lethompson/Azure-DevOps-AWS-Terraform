@@ -9,13 +9,11 @@ terraform {
 
 provider "aws" {
   region     = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
 }
 
 # EC2 Security Group - Example
 resource "aws_security_group" "new-webserver-sg" {
-  name        = "azure-devops-sg-example"
+  name        = "gitlab-sg-example"
   description = "Allow HTTP from Anywhere"
 
   ingress {
@@ -42,7 +40,7 @@ resource "aws_security_group" "new-webserver-sg" {
   }
 
   tags = {
-    Name      = "azure-devops-sg"
+    Name      = "gitlab-sg"
     Env       = "Dev"
     Owner     = "Lennox T."
     CreatedBy = "Terraform"
