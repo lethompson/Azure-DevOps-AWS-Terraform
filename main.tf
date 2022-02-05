@@ -13,7 +13,7 @@ provider "aws" {
 
 # EC2 Security Group - Example
 resource "aws_security_group" "new-webserver-sg" {
-  name        = "gitlab-sg-example"
+  name        = "azuredevops-sg-example"
   description = "Allow HTTP from Anywhere"
 
   ingress {
@@ -40,7 +40,7 @@ resource "aws_security_group" "new-webserver-sg" {
   }
 
   tags = {
-    Name      = "gitlab-sg"
+    Name      = "azuredevops-sg"
     Env       = "Dev"
     Owner     = "Lennox T."
     CreatedBy = "Terraform"
